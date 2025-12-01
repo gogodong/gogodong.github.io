@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>使用Mihomo内核过滤广告 | gogodong&#39;s blog</title>
+
+
+    <meta name="keywords" content="Mihomo">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="原理收集广告域名github上有大佬整理好的域名列表，Mihomo可以使用rule providers功能直接中链接中导入该列表，并且将其命名为“ads”。 在Mihomo中创建proxy-group脚本会在Mihomo中创建一个核心proxy-group:广告域名，包含了REJECT和PASS两个代理选项。  如果选择了reject，那么就会拒绝广告流量； 如果选择了PASS，意味着不作拦截；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Mihomo内核过滤广告">
+<meta property="og:url" content="http://gogodong.github.io/2025/11/26/Mihomo%E8%A7%84%E5%88%99/index.html">
+<meta property="og:site_name" content="gogodong&#39;s blog">
+<meta property="og:description" content="原理收集广告域名github上有大佬整理好的域名列表，Mihomo可以使用rule providers功能直接中链接中导入该列表，并且将其命名为“ads”。 在Mihomo中创建proxy-group脚本会在Mihomo中创建一个核心proxy-group:广告域名，包含了REJECT和PASS两个代理选项。  如果选择了reject，那么就会拒绝广告流量； 如果选择了PASS，意味着不作拦截；">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-01T08:45:28.606Z">
+<meta property="article:author" content="gogodong">
+<meta property="article:tag" content="Mihomo">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">gogodong blog</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friends/" class="navbar-menu button">友链</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">友链</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        使用Mihomo内核过滤广告
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/11/" class="post-meta__date button">2025-11-26</a>
+        
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="收集广告域名"><a href="#收集广告域名" class="headerlink" title="收集广告域名"></a>收集广告域名</h2><p>github上有大佬整理好的域名列表，Mihomo可以使用rule providers功能直接中链接中导入该列表，并且将其命名为“ads”。</p>
+<h2 id="在Mihomo中创建proxy-group"><a href="#在Mihomo中创建proxy-group" class="headerlink" title="在Mihomo中创建proxy-group"></a>在Mihomo中创建proxy-group</h2><p>脚本会在Mihomo中创建一个核心proxy-group:<br>广告域名，包含了REJECT和PASS两个代理选项。</p>
+<ul>
+<li>如果选择了reject，那么就会拒绝广告流量；</li>
+<li>如果选择了PASS，意味着不作拦截；</li>
+</ul>
+<h2 id="处理命中流量"><a href="#处理命中流量" class="headerlink" title="处理命中流量"></a>处理命中流量</h2><p>在有流量到达时，会利用如下配置进行匹配：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RULE-SET,ads,广告域名;</span><br></pre></td></tr></table></figure>
+<p>其大致意思是：使用名为”ads”的“RULE-SET”进行匹配，如果命中，那么使用“广告域名”proxy-group选择的方式进行处理。</p>
+<ul>
+<li>如果选择了reject，那么就会拒绝广告流量，广告内容就不会显示了；</li>
+<li>如果选择了PASS，意味着不作拦截（会接着用广告流量域名继续往下匹配其他规则，看看给它丢到哪个proxy-group里）。</li>
+</ul>
+<h1 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h1><p>用脚本很简单，在全局覆写脚本中定义以下函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ensureAdblockConfig</span>(<span class="params">config</span>) &#123;</span><br><span class="line">    <span class="comment">// 1. rule-providers: ads</span></span><br><span class="line">    <span class="keyword">if</span> (!config[<span class="string">&#x27;rule-providers&#x27;</span>]) config[<span class="string">&#x27;rule-providers&#x27;</span>] = &#123;&#125;;</span><br><span class="line">    <span class="keyword">if</span> (!config[<span class="string">&#x27;rule-providers&#x27;</span>].<span class="property">ads</span>) &#123;</span><br><span class="line">        config[<span class="string">&#x27;rule-providers&#x27;</span>].<span class="property">ads</span> = &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&quot;http&quot;</span>,</span><br><span class="line">            <span class="attr">behavior</span>: <span class="string">&quot;domain&quot;</span>,</span><br><span class="line">            <span class="attr">format</span>: <span class="string">&quot;mrs&quot;</span>,</span><br><span class="line">            <span class="attr">path</span>: <span class="string">&quot;./rules/ads.mrs&quot;</span>,</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&quot;https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/mihomo.mrs&quot;</span>,</span><br><span class="line">            <span class="attr">interval</span>: <span class="number">86400</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: 已创建 rule-provider &quot;ads&quot;&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: rule-provider &quot;ads&quot; 已存在, 保留现有配置&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. proxy-groups: 广告域名 / 全球拦截 / 全球绕过</span></span><br><span class="line">    <span class="keyword">if</span> (!config[<span class="string">&#x27;proxy-groups&#x27;</span>]) config[<span class="string">&#x27;proxy-groups&#x27;</span>] = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">findGroup</span> = (<span class="params">name</span>) =&gt; config[<span class="string">&#x27;proxy-groups&#x27;</span>].<span class="title function_">find</span>(<span class="function"><span class="params">g</span> =&gt;</span> g &amp;&amp; g.<span class="property">name</span> === name);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.1 全球拦截 -&gt; REJECT</span></span><br><span class="line">    <span class="keyword">let</span> globalBlock = <span class="title function_">findGroup</span>(<span class="string">&#x27;全球拦截&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!globalBlock) &#123;</span><br><span class="line">        globalBlock = &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;全球拦截&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;select&#x27;</span>,</span><br><span class="line">            <span class="attr">proxies</span>: [<span class="string">&#x27;REJECT&#x27;</span>],</span><br><span class="line">            <span class="attr">hidden</span>: <span class="literal">true</span></span><br><span class="line">        &#125;;</span><br><span class="line">        config[<span class="string">&#x27;proxy-groups&#x27;</span>].<span class="title function_">push</span>(globalBlock);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: 已创建分组 &quot;全球拦截&quot;&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.2 全球绕过 -&gt; PASS</span></span><br><span class="line">    <span class="keyword">let</span> globalBypass = <span class="title function_">findGroup</span>(<span class="string">&#x27;全球绕过&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!globalBypass) &#123;</span><br><span class="line">        globalBypass = &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;全球绕过&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;select&#x27;</span>,</span><br><span class="line">            <span class="attr">proxies</span>: [<span class="string">&#x27;PASS&#x27;</span>],</span><br><span class="line">            <span class="attr">hidden</span>: <span class="literal">true</span></span><br><span class="line">        &#125;;</span><br><span class="line">        config[<span class="string">&#x27;proxy-groups&#x27;</span>].<span class="title function_">push</span>(globalBypass);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: 已创建分组 &quot;全球绕过&quot;&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.3 广告域名 -&gt; [全球拦截, 全球绕过]</span></span><br><span class="line">    <span class="keyword">let</span> adsGroup = <span class="title function_">findGroup</span>(<span class="string">&#x27;广告域名&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!adsGroup) &#123;</span><br><span class="line">        adsGroup = &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;广告域名&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;select&#x27;</span>,</span><br><span class="line">            <span class="attr">proxies</span>: [<span class="string">&#x27;全球拦截&#x27;</span>, <span class="string">&#x27;全球绕过&#x27;</span>]</span><br><span class="line">        &#125;;</span><br><span class="line">        config[<span class="string">&#x27;proxy-groups&#x27;</span>].<span class="title function_">push</span>(adsGroup);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: 已创建分组 &quot;广告域名&quot;&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!adsGroup.<span class="property">proxies</span>) adsGroup.<span class="property">proxies</span> = [];</span><br><span class="line">        <span class="keyword">if</span> (!adsGroup.<span class="property">proxies</span>.<span class="title function_">includes</span>(<span class="string">&#x27;全球拦截&#x27;</span>)) &#123;</span><br><span class="line">            adsGroup.<span class="property">proxies</span>.<span class="title function_">unshift</span>(<span class="string">&#x27;全球拦截&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!adsGroup.<span class="property">proxies</span>.<span class="title function_">includes</span>(<span class="string">&#x27;全球绕过&#x27;</span>)) &#123;</span><br><span class="line">            adsGroup.<span class="property">proxies</span>.<span class="title function_">push</span>(<span class="string">&#x27;全球绕过&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: 已更新分组 &quot;广告域名&quot; 的可选代理&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. rules: RULE-SET,ads,广告域名</span></span><br><span class="line">    <span class="keyword">if</span> (!config.<span class="property">rules</span>) config.<span class="property">rules</span> = [];</span><br><span class="line">    <span class="keyword">const</span> adsRuleLine = <span class="string">&#x27;RULE-SET,ads,广告域名&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!config.<span class="property">rules</span>.<span class="title function_">includes</span>(adsRuleLine)) &#123;</span><br><span class="line">        <span class="comment">// 建议插在比较靠前的位置，也可以用 push</span></span><br><span class="line">        config.<span class="property">rules</span>.<span class="title function_">unshift</span>(adsRuleLine);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`[Script] log: 已添加规则 &quot;<span class="subst">$&#123;adsRuleLine&#125;</span>&quot;`</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`[Script] log: 规则 &quot;<span class="subst">$&#123;adsRuleLine&#125;</span>&quot; 已存在, 跳过添加`</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. DNS: nameserver-policy 里对 ads 直接 rcode://success</span></span><br><span class="line">    <span class="keyword">if</span> (!config.<span class="property">dns</span>) config.<span class="property">dns</span> = &#123;&#125;;</span><br><span class="line">    <span class="keyword">if</span> (!config.<span class="property">dns</span>[<span class="string">&#x27;nameserver-policy&#x27;</span>]) config.<span class="property">dns</span>[<span class="string">&#x27;nameserver-policy&#x27;</span>] = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> nsp = config.<span class="property">dns</span>[<span class="string">&#x27;nameserver-policy&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(nsp[<span class="string">&#x27;rule-set:ads&#x27;</span>])) &#123;</span><br><span class="line">        nsp[<span class="string">&#x27;rule-set:ads&#x27;</span>] = [<span class="string">&#x27;rcode://success&#x27;</span>];</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: 已在 dns.nameserver-policy 中添加 &quot;rule-set:ads&quot; -&gt; rcode://success&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;[Script] log: dns.nameserver-policy 中已存在 &quot;rule-set:ads&quot;, 保留现有配置&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后在main中调用该函数即可完成广告过滤。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>更新于 2025-12-01</p></div> 
+    <div class="post-entry__tags"><a href="/tags/Mihomo/" class="post-tags__link button"># Mihomo</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/11/20/Azure%20Student%20Plan%E7%94%B3%E8%AF%B7/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            下一篇
+                        </div>
+                        <div class="nav__title">
+                            Azure Student Plan 申请
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+    
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2025 <a href="/">gogodong&#39;s blog</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
